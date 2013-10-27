@@ -1,0 +1,56 @@
+import java.awt.*;
+import java.applet.*;
+import java.awt.image.*;
+import javax.swing.*;
+import java.net.*;
+import javax.imageio.*;
+import javax.swing.*;
+import java.awt.event.*;
+import java.io.*;
+/*
+<applet code=ChessBoard width=700 height=700> </applet>
+*/
+public class ChessBoard extends Applet implements ActionListener
+{
+     BufferedImage pic = null;
+     int row, column, x, y;
+     JLabel lbl = new JLabel();
+     JButton btn;
+     Icon ic;
+     public void paint(Graphics g) 
+     {
+               for (row = 0;  row < 8;  row++ ) 
+               {
+                    for (column = 0;  column < 8;  column++) 
+                    {
+                         x = column * 70;
+                         y = row * 100;
+                         if ( (row % 2) == (column % 2) ) 
+                              g.setColor(Color.red);
+                         else
+                              g.setColor(Color.black);
+                         g.fillRect(x, y, 70, 100);
+                    } 
+               } 
+               try
+               {
+                    URL u = new URL(getCodeBase(),"pic.png");
+                    pic = ImageIO.read(u);
+               }
+               catch(IOException e)
+               {
+                    g.drawString("error while fetching image",100,100);
+               }
+              //g.drawImage(pic,350,100,null);
+               ic = new ImageIcon(pic);
+               btn = new JButton(ic);
+               btn.setBounds(350,100,70,100);
+               add(btn);
+               btn.addActionListener(this);
+     }
+
+     public void actionPerformed(ActionEvent e)
+     {
+          JOptionPane.showMessageDialog(null,"you clicked on queen");
+     }
+}
