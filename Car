@@ -1,0 +1,37 @@
+import java.applet.*;
+import java.awt.*;
+/* <applet code="Car" width=1000 height=500>
+</applet> */
+public class Car extends Applet
+{
+	int x;
+	public void init()
+	{
+		setBackground(Color.pink);
+		x=0;
+	}
+	public void paint(Graphics g)
+	{
+		g.setColor(Color.red);
+		g.fillArc(x+50,50,250,200,0,180);
+		g.setColor(Color.black);
+		g.fillOval(x+70,120,50,50);
+		g.fillOval(x+230,120,50,50);
+		g.setColor(Color.black);
+		g.drawString("           DHOOM ",x+120,100);
+		moves();
+	}
+	public void moves()
+	{
+		if(x>900)
+			x=0;
+		else
+			x++;
+		repaint();
+		try
+		{
+			Thread.sleep(10);
+		}
+		catch(Exception e){}
+	}
+}
